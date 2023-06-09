@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+    <div class="container p-5 ">
+        <div class="card text-center ">
+            <div class="card-header shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                Pantalla de Inicio
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Bienvenido al Monitoreo de Switches..</h5>
+                <p class="card-text">Programa para detectar un Dispositivo mediante la dirección IP.</p>
+                <a  href="{% url 'list_swicth_View' %}" class="btn btn-secondary btn-outline-warning col-4">Acceder</a>
+            </div>
+            <div class="card-footer text-body-secondary shadow-lg p-3  bg-body-tertiary rounded">
+                <strong id="fecha_hora"></strong>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", e => {
+            const fechaActual = new Date();
+
+            const anio = fechaActual.getFullYear();
+            const mes = String(fechaActual.getMonth() + 1).padStart(2, '0');
+            const dia = String(fechaActual.getDate()).padStart(2, '0');
+
+            const fechaHoraActual = ` ${dia} / ${mes}  / ${anio}`;
+
+            document.getElementById("fecha_hora").innerHTML = fechaHoraActual;
+        })
+    </script>
+{% endblock %}

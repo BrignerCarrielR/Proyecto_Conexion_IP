@@ -1,0 +1,34 @@
+{% extends 'form.html' %}
+{% load static %}
+
+
+{% block controls %}
+    {% csrf_token %}
+<h4 class=" text-warning">{{ data }}</h4>
+            <hr>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Informacion: </strong>
+            <p id="mensaje"></p>
+        {% if form.errors %}
+            <strong>Error al Grabar</strong>
+            {{ form.errors }}
+        {% endif %}
+    </div>
+    <div class="row g-3 align-items-center">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Nombre:</span>
+            {{ form.nombre }}
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">IP address:</span>
+            {{ form.ip }}
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Bloque: </span>
+            {{ form.bloque }}
+        </div>
+    </div>
+
+
+    <input type="hidden" name="action" value="{{ action }}">
+{% endblock %}

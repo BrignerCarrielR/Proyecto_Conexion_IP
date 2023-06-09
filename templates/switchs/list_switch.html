@@ -1,0 +1,157 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block cuerpo %}
+    <div class="h4 m-4 pb-2 mb-4 text-warning border-bottom border-warnint ">
+        <h3>Filtros</h3>
+        <form class="position-relative" action="" method="GET">
+            <input type="text" name="nombre" class="col-md-2" placeholder="Filtre por Nombre"
+                   value="{{ request.GET.nombre }}">
+            <input type="text" name="ip" class="col-md-2" placeholder="Filtre por IP" value="{{ request.GET.ip }}">
+            <select name="bloque" placeholder="Filtre por Estado" class="col-md-2">
+                <option VALUE="">--</option>
+                <option VALUE="A">Bloque A</option>
+                <option value="B">Bloque B</option>
+                <option VALUE="C">Bloque C</option>
+                <option value="D">Bloque D</option>
+                <option VALUE="F">Bloque F</option>
+                <option value="G">Bloque G</option>
+                <option VALUE="H">Bloque H</option>
+                <option value="I">Bloque I</option>
+                <option VALUE="F">Bloque F</option>
+                <option value="K">Bloque K</option>
+                <option VALUE="L">Bloque L</option>
+                <option value="M">Bloque M</option>
+                <option VALUE="N">Bloque N</option>
+                <option value="O">Bloque O</option>
+                <option VALUE="P">Bloque P</option>
+                <option value="Q">Bloque Q</option>
+                <option value="R">Bloque R</option>
+                <option VALUE="S">Bloque S</option>
+                <option value="T">Bloque T</option>
+                <option VALUE="U">Bloque U</option>
+                <option value="V">Bloque V</option>
+            </select>
+            <Button class="m-2 btn btn-warning  col">Buscar</Button>
+            <input class="m-2 btn btn-secondary text-white col" type="button" value="Limpiar"
+                   onclick="location.href='{% url 'list_swicth_View' %}'">
+            <a href="{% url 'inicio' %}" class="btn btn-warning  position-absolute top-0 end-0">Salir</a>
+        </form>
+    </div>
+
+
+    <div class="h4 m-4 pb-2 mb-4 text-warning border-bottom border-warnint position-relative">
+        <h3>Listado de Switches</h3>
+        <a href="{% url 'new_swicth_View' %}" class="btn btn-warning position-absolute top-0 end-0">Agregar Nuevo</a>
+    </div>
+    <div class="">
+
+
+        <div class="container-fluid row m-1">
+            {% for object in list_swicth %}
+                {% if object.estado == True %}
+                    <div class="card m-2 shadow-lg  mb-2 bg-body rounded" style="width: 10rem;"
+                         title="NOMBRE: {{ object.nombre }}
+IP: {{ object.ip }}
+BLOQUE: {{ object.bloque }}">
+                        <center>
+                            <img style="width: 4rem;"
+                                 src="https://th.bing.com/th/id/R.866d502b13ecce374cd995b2fd137ac1?rik=7OMaDBy7%2bijbew&pid=ImgRaw&r=0"
+                                 class="card-img-top" alt="...">
+                        </center>
+                        <div class="card-body ">
+                            <button type="button" class="btn text-center text-white bg-success fw-bold form-control"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#{{ object.id }}">
+                                ACTIVO
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ object.id }}" aria-hidden="true"
+                                 aria-labelledby="acciones" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="acciones">{{ object.nombre }}   => IP: {{ object.ip }}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Acciones que puede realizar:
+                                        </div>
+                                        <div class="modal-footer ">
+                                            <a CLASS="col btn text-center bg-warning fw-bold "
+                                               href="{% url 'update_Switch_View' object.id %}">
+                                                Editar
+                                            </a>
+                                            <a CLASS="col btn text-center text-white bg-secondary fw-bold"
+                                               href="{% url 'delete_Switch_View' object.id %}">
+                                                Eliminar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% else %}
+                    <div class="card m-2 shadow-lg  mb-2 bg-body rounded" style="width: 10rem;"
+                         title="NOMBRE: {{ object.nombre }}
+IP: {{ object.ip }}
+BLOQUE: {{ object.bloque }}">
+                        <center>
+                            <img style="width: 4rem;"
+                                 src="https://th.bing.com/th/id/R.866d502b13ecce374cd995b2fd137ac1?rik=7OMaDBy7%2bijbew&pid=ImgRaw&r=0"
+                                 class="card-img-top" alt="...">
+                        </center>
+
+                         <div class="card-body ">
+                            <button type="button" class="btn text-center text-white bg-danger fw-bold form-control"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#{{ object.id }}">
+                                INACTIVO
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ object.id }}" aria-hidden="true"
+                                 aria-labelledby="acciones" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="acciones">{{ object.nombre }}   => IP: {{ object.ip }}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Acciones que puede realizar:
+                                        </div>
+                                        <div class="modal-footer ">
+                                            <a CLASS="col btn text-center bg-warning fw-bold "
+                                               href="{% url 'update_Switch_View' object.id %}">
+                                                Editar
+                                            </a>
+                                            <a CLASS="col btn text-center text-white bg-secondary fw-bold"
+                                               href="{% url 'delete_Switch_View' object.id %}">
+                                                Eliminar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+
+    </div>
+    <script>
+        function actualizar() {
+            location.reload(true);
+        }
+
+        //Función para actualizar cada 5 segundos(5000 milisegundos)
+        setInterval("actualizar()", 20000);
+    </script>
+{% endblock %}
+

@@ -1,0 +1,37 @@
+{% extends 'delete.html' %}
+{% load static %}
+
+
+{% block controls %}
+    {% csrf_token %}
+    <h4 class=" text-warning">Eliminar Dispositivo</h4>
+            <hr>
+    <b STYLE="color: #003b46">Estas seguro de eliminar este Registro?</b>
+    <p>_______No se podrá recuperar la siguiente información!</p>
+    <hr>
+    <b>Informacion:</b>
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="width: 250px" scope="col">Nombre</th>
+            <th style="width: 250px" scope="col">Ip</th>
+            <th style="width: 250px" scope="col">Bloque</th>
+            <th style="width: 250px" scope="col">Estado</th>
+
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        <tr>
+            <td style="width: 250px">{{ object.nombre }}</td>
+            <td style="width: 250px">{{ object.ip }}</td>
+            <td style="width: 250px">{{ object.bloque }}</td>
+            {% if object.estado == True %}
+                <td style="width: 250px">Activo</td>
+            {% else %}
+                <td style="width: 250px">Inactivo</td>
+            {% endif %}
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
